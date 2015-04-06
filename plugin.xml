@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, either express or implied.  See the License for the
+  specific language governing permissions and limitations
+  under the License.
+-->
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:rim="http://www.blackberry.com/ns/widgets"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="phonegap-plugin-msband"
+    version="0.0.0">
+    <name>Device</name>
+    <description>PhoneGap Plugin for Microsoft Band</description>
+    <license>Apache 2.0</license>
+    <keywords>cordova,phonegap,microsoft-band,wearables</keywords>
+    <repo>https://github.com/phonegap/plonegap-plugin-msband.git</repo>
+    <issue>https://github.com/phonegap/plonegap-plugin-msband/issues</issue>
+
+    <js-module src="src/www/msband.js" name="msband">
+        <clobbers target="msband" />
+    </js-module>
+
+    <!-- android -->
+<!--     <platform name="android">
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.BLUETOOTH"/>
+            <uses-permission android:name="com.microsoft.band.service.access.BIND_BAND_SERVICE" />
+        </config-file>
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="MSBandGap" >
+                <param name="android-package" value="com.phonegap.MSBandGap"/>
+            </feature>
+        </config-file>
+
+        <source-file src="src/android/MSBandGap.java" target-dir="src/com/phonegap/MSBandGap" />
+    </platform> -->
+
+    <!-- amazon-fireos -->
+<!--     <platform name="amazon-fireos">
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.BLUETOOTH"/>
+            <uses-permission android:name="com.microsoft.band.service.access.BIND_BAND_SERVICE" />
+        </config-file>
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="MSBandGap" >
+                <param name="android-package" value="com.phonegap.MSBandGap"/>
+            </feature>
+        </config-file>
+
+        <source-file src="src/android/MSBandGap.java" target-dir="src/com/phonegap/MSBandGap" />
+    </platform> -->
+    
+
+    <!-- ios -->
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="MSBand">
+                <param name="ios-package" value="MSBand"/>
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/CDVMSBand.h" />
+        <source-file src="src/ios/CDVMSBand.m" />
+    </platform>
+
+
+    <!-- windows  -->
+    <!-- TODO!!
+    <platform name="windows">
+        <js-module src="src/windows/MSBandProxy.js" name="MSBandProxy">
+            <merges target="" />
+        </js-module>
+        <config-file target="package.appxmanifest" parent="/Package/Capabilities">
+            <m2:DeviceCapability Name="bluetooth.rfcomm">
+                <m2:Device Id="any">
+                    <m2:Function Type="serviceId:A502CA9A-2BA5-413C-A4E0-13804E47B38F" />
+                    <m2:Function Type="serviceId:C742E1A2-6320-5ABC-9643-D206C677E580" />
+                </m2:Device>
+            </m2:DeviceCapability>
+        </config-file>
+    </platform> 
+    -->
+
+
+</plugin>
