@@ -5,6 +5,72 @@ var subscribers = {
 
 };
 
+var BandContactState = {
+	NotWorn:0,
+	Worn:1
+};
+
+var BandContactReading = {
+	'bandContactState':BandContactState.NotWorn
+}
+
+var HeartRateQuality = {
+	Acquiring:0,
+	Locked:1
+};
+
+var BandAccelerometerReading = {
+	x:0,
+	y:0,
+	z:0
+};
+
+var BandMotionType = {
+	Idle:0,
+	Jogging:1,
+	Running:2,
+	Unknown:3,
+	Walking:4
+};
+
+var BandDistanceReading = {
+	currentMotion:BandMotionType.Unknown, // motion type
+	pace:0,
+	speed:0,
+	totalDistance:0
+}
+
+var BandGyroscopeReading = {
+	x:0,y:0,z:0 // angular velocity
+}
+
+var BandHeartRateReading = {
+	heartRate:0,
+	heartRateQuality:HeartRateQuality.Acquiring
+}
+
+var BandPedometerReading = {
+	totalSteps:0
+}
+
+var BandSkinTemperatureReading = {
+	temperature:0 // degrees celcius
+}
+
+var UVExposureLevel = {
+	None:0,
+	Low:1,
+	Medium:2,
+	High:3,
+	VeryHigh:4
+}
+
+var BandUVLightReading = {
+	exposureLevel:
+}
+
+
+
 
 
 var sensorEventNames [ 

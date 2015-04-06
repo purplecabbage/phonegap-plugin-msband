@@ -1,0 +1,16 @@
+# If we don't take action now
+# We settle for nothing later 
+# Settle for nothing now
+# And we'll settle for nothing later
+
+*.csproj.user
+*.suo
+*.cache
+Thumbs.db
+*.DS_Store
+
+*.bak
+*.cache
+*.log
+*.swp
+*.user
