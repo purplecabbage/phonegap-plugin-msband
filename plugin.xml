@@ -34,6 +34,18 @@
         <clobbers target="msband" />
     </js-module>
 
+    <!-- ios -->
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="MSBand">
+                <param name="ios-package" value="MSBand"/>
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/CDVMSBand.h" />
+        <source-file src="src/ios/CDVMSBand.m" />
+    </platform>
+
     <!-- android -->
 <!--     <platform name="android">
         <config-file target="AndroidManifest.xml" parent="/*">
@@ -67,17 +79,7 @@
     </platform> -->
     
 
-    <!-- ios -->
-    <platform name="ios">
-        <config-file target="config.xml" parent="/*">
-            <feature name="MSBand">
-                <param name="ios-package" value="MSBand"/>
-            </feature>
-        </config-file>
 
-        <header-file src="src/ios/CDVMSBand.h" />
-        <source-file src="src/ios/CDVMSBand.m" />
-    </platform>
 
 
     <!-- windows  -->
