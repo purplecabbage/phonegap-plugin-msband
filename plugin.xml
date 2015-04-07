@@ -23,7 +23,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="phonegap-plugin-msband"
     version="0.0.0">
-    <name>Device</name>
+    <name>PhoneGap MSBand Plugin</name>
     <description>PhoneGap Plugin for Microsoft Band</description>
     <license>Apache 2.0</license>
     <keywords>cordova,phonegap,microsoft-band,wearables</keywords>
