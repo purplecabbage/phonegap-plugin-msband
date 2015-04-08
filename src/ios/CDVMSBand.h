@@ -7,6 +7,8 @@
 
 }
 
+- (void)queryVersionInfo:(CDVInvokedUrlCommand*)command;
+
 
 - (void)watchSensor:(CDVInvokedUrlCommand*)command;
 
