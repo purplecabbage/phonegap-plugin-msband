@@ -27,8 +27,8 @@
     <description>PhoneGap Plugin for Microsoft Band</description>
     <license>Apache 2.0</license>
     <keywords>cordova,phonegap,microsoft-band,wearables</keywords>
-    <repo>https://github.com/phonegap/plonegap-plugin-msband.git</repo>
-    <issue>https://github.com/phonegap/plonegap-plugin-msband/issues</issue>
+    <repo>https://github.com/phonegap/phonegap-plugin-msband.git</repo>
+    <issue>https://github.com/phonegap/phonegap-plugin-msband/issues</issue>
 
     <js-module src="src/www/msband.js" name="msband">
         <clobbers target="msband" />
