@@ -129,7 +129,7 @@ module.exports = {
 						if(sensorCallbacks[sensorEvent].length === 1) {
 							// only exec the native code if we go from 0->1
 							// otherwise, we'll just notify the next time we receive a message
-							exec(onSensorUpdate, onSensorError, "MSBandPlugin", "sensorWatch", [sensorEvent]);
+							exec(onSensorUpdate, onSensorError, "MSBandPlugin", "watchSensor", [sensorEvent]);
 						}
 					}
 				}
@@ -147,7 +147,7 @@ module.exports = {
 
 					if(sensorCallbacks[sensorEvent].length < 1) {
 						// only exec the native code if we go from 1->0
-						exec(null, null, "MSBandPlugin", "sensorUnWatch", [sensorEvent]);
+						exec(null, null, "MSBandPlugin", "unwatchSensor", [sensorEvent]);
 					}
 
 				}
