@@ -1,7 +1,5 @@
-
 var exec = require('cordova/exec');
 var subscribers = {
-	heartRate:[],
 
 };
 
@@ -66,14 +64,14 @@ var UVExposureLevel = {
 }
 
 var BandUVLightReading = {
-	exposureLevel:
+	exposureLevel:0
 }
 
 
 
 
 
-var sensorEventNames [ 
+var sensorEventNames = [
 	"accelerometer",
 	"gyroscope",
 	"distance",
@@ -122,7 +120,7 @@ module.exports = {
 				sensorEvent = sensorEvent.toLowerCase();
 				if(sensorCallbacks[sensorEvent].length) {
 					if(sensorCallbacks[sensorEvent].indexOf(callback) > -1) {
-						console.log(("Sensor Add Error - Sensor callback already exists : " + sensorEvent);
+						console.log("Sensor Add Error - Sensor callback already exists : " + sensorEvent);
 					}
 					else {
 						sensorCallbacks[sensorEvent].push(callback);
@@ -160,3 +158,4 @@ module.exports = {
 	
 
 }
+
