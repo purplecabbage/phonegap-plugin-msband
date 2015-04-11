@@ -44,6 +44,7 @@
 
         <header-file src="src/ios/CDVMSBand.h" />
         <source-file src="src/ios/CDVMSBand.m" />
+        <framework src="src/ios/MicrosoftBandKit_iOS.framework" custom="true" />
     </platform>
 
     <!-- android -->
