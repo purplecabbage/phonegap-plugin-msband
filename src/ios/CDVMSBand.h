@@ -1,8 +1,8 @@
 
-
+#import <MicrosoftBandKit_iOS/MicrosoftBandKit_iOS.h>
 #import <Cordova/CDVPlugin.h>
 
-@interface MSBandPlugin : CDVPlugin
+@interface MSBandPlugin : CDVPlugin<MSBClientManagerDelegate>
 {
 
 }

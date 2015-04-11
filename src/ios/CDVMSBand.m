@@ -1,19 +1,23 @@
 
-#import <MicrosoftBandKit_iOS/MicrosoftBandKit_iOS.h>
 
+#import "CDVMSBand.h"
+
+@interface MSBandPlugin () {}
+@property (nonatomic, weak) MSBClient *client;
+@end
 
 @implementation MSBandPlugin
 
--(void)init
+-(void)initialize
 {
-	[[MSBClientManager sharedManager] setDelegate:self];
-	NSArray *attachedClients = [[MSBClientManager sharedManager] attachedClients];
-
-	MSBClient *client = [attachedClients firstObject];
-	if (client)
-	{
-		[[MSBClientManager sharedManager] connectClient:client];
-	}
+//	[[MSBClientManager sharedManager] setDelegate:self];
+//	NSArray *attachedClients = [[MSBClientManager sharedManager] attachedClients];
+//
+//	MSBClient *client = [attachedClients firstObject];
+//	if (client)
+//	{
+//		[[MSBClientManager sharedManager] connectClient:client];
+//	}
 }
 
 // Note: The delegate methods of MSBClientManagerDelegate protocol are called in the main thread.

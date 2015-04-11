@@ -108,10 +108,6 @@ function onSensorError(sensorEvent,res) {
 // hardware version and firmware version
 
 
-
-
-
-
 module.exports = {
 
 	sensor:{
