@@ -14,3 +14,7 @@ Thumbs.db
 *.log
 *.swp
 *.user
+
+demo/hooks/
+demo/platforms/
+demo/plugins/
