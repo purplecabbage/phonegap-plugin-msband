@@ -4,6 +4,7 @@
 
 @interface MSBandPlugin () {}
 @property (nonatomic, weak) MSBClient *client;
+@property (nonatomic, retain) NSString* connectCallbackId;
 @end
 
 @implementation MSBandPlugin
@@ -12,6 +13,8 @@
 {
 	[[MSBClientManager sharedManager] setDelegate:self];
 	NSArray *attachedClients = [[MSBClientManager sharedManager] attachedClients];
+    
+    self.connectCallbackId = [NSString stringWithString:command.callbackId ];
 
 	_client = [attachedClients firstObject];
 	if (_client)
@@ -30,19 +33,30 @@
 {
     // handle connected event.
     self.client = client;
-    // TODO: notify js
+    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+    [pluginResult setKeepCallbackAsBool:YES];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:self.connectCallbackId];
+    
 }
 
 -(void)clientManager:(MSBClientManager *)cm clientDidDisconnect:(MSBClient *)client
 {
 	// handle disconnected event.
+    // TODO: pass back something to say that this is a disconnect, and different fromt the error below.
     self.client = nil;
+    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+    [pluginResult setKeepCallbackAsBool:NO];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:self.connectCallbackId];
 }
 
 -(void)clientManager:(MSBClientManager *)cm client:(MSBClient *)client didFailToConnectWithError:(NSError *)error
 {
-	// handle failure event.
-    // TODO: notify js
+    // handle connect error event.
+    // TODO: pass back resultCode based on this type of error
+    self.client = nil;
+    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+    [pluginResult setKeepCallbackAsBool:NO];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:self.connectCallbackId];
 }
 
 
