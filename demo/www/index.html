@@ -5,19 +5,17 @@
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-        <link rel="stylesheet" type="text/css" href="css/topcoat-mobile-dark.min.css">
-        <link href="css/index.css" rel="stylesheet" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <link href="index.css" rel="stylesheet" />
 
         <title>Cordova MSBand Sensor Demo</title>
     </head>
     <body>
 
-    <div> <!-- accordion wrap -->
-        <div class="topcoat-navigation-bar">
-    <div class="topcoat-navigation-bar__item center full">
-        <h1 class="topcoat-navigation-bar__title">Microsoft Band &amp; Apache Cordova Plugin</h1>
-    </div>
-</div>
+    <div>
+        <header class="headerBar">
+            <div class="headerBarTitle">Microsoft Band &amp; Apache Cordova Plugin</div>
+        </header>
         <ul class="accordion">
             
             <li id="infoView">
@@ -26,28 +24,34 @@
                 <div class="sub-view">
                     <table>
                         <tr>
-                            <td>Click the button to get the hardware and firmware version from the band.
+                            <td colspan="2">Click the button to get the hardware and firmware version from the band.
                             </td>
+                        </tr>
+                        <tr>
+                            <td></td>
                             <td>
-                                <button class="topcoat-button--cta" id="btnGetBandInfo" >Get Band Info &gt;</button>
+                                <button class="actionButton" 
+                                        id="btnGetBandInfo">Get Band Info &gt;
+                                </button>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <div class='dvLabelValue' id="pFirmwareVersion">Firmware Version :</div> 
+                                <div class='dvLabelValue'>Firmware</div>
                             </td>
                             <td>
-                                <div class="value">unknown</div>
+                                <div class="value" id="pFirmwareVersion">unknown</div>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <div class='dvLabelValue' id="pHardwareVersion">Hardware Version :</div>
+                                <div class='dvLabelValue' >Hardware</div>
                             </td>
                             <td>
-                                <div class="value">unknown</div>
+                                <div class="value" id="pHardwareVersion">unknown</div>
                             </td>
                         </tr>
+
 
                     </table>    
 
@@ -58,15 +62,50 @@
                 <a href="#sensorsView">Sensors</a>
                 <div class="sub-view">
                 This is where you can start and stop sensors
-                <br><br>
                 
-                <label class="topcoat-switch">
-                    <input type="checkbox" class="topcoat-switch__input">
+                <br><br>
 
-                    <div class="topcoat-switch__toggle"></div>
-                </label>
+                    <ul class="ulSensors">
+                        <li>
+                            <h3>Band Contact</h3>
+                            <p>Provides a way to let the developer know if someone is currently wearing the Band.</p>
+                        </li>
+                        <li>
+                            <h3>UV Level</h3>
+                            <p>Provides the current ultra violet radition exposure intensity.</p>
 
-                </div>
+
+                        </li>
+                        <li>
+                            <h3>Skin Temperature</h3>
+                            <p>Provides the current skin temperature of the wearer in degrees Celius (&#176;c)</p>
+                        </li>
+                        <li>
+                            <h3>Pedometer</h3>
+                            <p>Provides the total number of steps the wearer has taken.</p>
+                        </li>
+                        <li>
+                            <h3>Distance</h3>
+                            <p>Provides the total distance in centimeters, current speed in centimeters per second (cm/s),
+current pace in milliseconds per meter (ms/m), and the current pedometer mode (such as
+walking or running).</p>
+                        </li>
+
+                        <li>
+                            <h3>HeartRate</h3>
+                            <p>Provides the number of beats per minute, also indicates if the heart rate sensor is fully
+locked onto the wearer&apos;s heart rate.</p>
+                        </li>
+                        <li>
+                            <h3>Accelerometer</h3>
+                            <p>Provides X, Y, and Z acceleration in g units. 1 g = 9.81 meters per second squared (m/s<sup>2</sup>).</p>
+                        </li>
+                        <li>
+                            <h3>Gyroscope</h3>
+                            <p>Provides X, Y, and Z angular velocity in degrees per second (&#176;/sec) units.</p>
+                        </li>
+                    </ul>
+                </div>                
 
             </li>
             
@@ -99,8 +138,7 @@
     </div>
 
         
-        <!-- <script type="text/javascript" src="cordova.js"></script> -->
-
-        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="index.js"></script>
     </body>
 </html>

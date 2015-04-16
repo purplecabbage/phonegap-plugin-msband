@@ -1,0 +1,165 @@
+
+* {
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+body {
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+    background:#0B3731;
+    color:#eee;
+    font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+    font-size:18px;
+    height:100%;
+    margin:0px;
+    padding:0px;
+    width:100%;
+}
+
+/*
+    hilight color : 87E1D4
+    selected color: #219E8C
+    default color : 12574D
+    background dark: 0B3731;
+*/
+
+.headerBar {
+  height: 52px;
+  background: #0B3731;
+  color: #fff;
+}
+
+.headerBarTitle {
+  font-size: 18px;
+  line-height: 38px;
+  color: #eee;
+  text-align: center;
+  margin-top:10px;
+}
+
+
+.actionButton {
+  border: 1px solid #134f7f;
+  background-color: #219E8C;
+  color:#000;
+  height:42px;
+  font-weight:bold;
+  font-size:16px;
+  float:right;
+  margin:20px 0px;
+}
+
+.actionButton:active {
+    background-color: #87E1D4;
+}
+
+.actionButton:hover {
+    background-color: #87E1D4;
+}
+
+.dvLabelValue {
+    font: 18px/32px;
+    height:32px;  
+}
+
+div.value{
+    background-color: #0B3731;
+    width:240px;
+    height:32px;   
+    margin:0px 0px 5px 10px;
+    padding:0px 12px 0px 12px;
+    font: bold 18px/32px;
+    float:right;
+}
+
+
+
+.accordion,
+.accordion ul,
+.accordion li,
+.accordion a,
+.accordion span {
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+}
+
+.accordion {
+    background:#12574D;
+    min-height:700px;
+}
+
+.accordion li {
+    list-style: none;
+}
+
+.accordion li > a {
+    display: block;
+    position: relative;
+    min-width: 110px;
+    padding: 20px 10px 0 40px;
+    height: 52px;
+    color: #21B09A;
+    font-weight: bold;
+    font-size:26px;
+    line-height: 36px;
+    text-decoration: none;
+    text-shadow: 0px 0px 4px rgba(0,0,0, .45);
+    letter-spacing: 1.5pt;
+    background: #177164;
+    border-bottom:solid 1px #12574D;
+
+    /*-webkit-box-shadow: inset 0px 1px 0px 0px rgba(255,255,255, .1), 0px 1px 0px 0px rgba(0,0,0, .1);
+    -moz-box-shadow: inset 0px 1px 0px 0px rgba(255,255,255, .1), 0px 1px 0px 0px rgba(0,0,0, .1);
+    box-shadow: inset 0px 1px 0px 0px rgba(255,255,255, .1), 0px 1px 0px 0px rgba(0,0,0, .1);*/
+}
+
+.accordion > li:hover > a {
+    background: #87E1D4;
+    color: #0B3731;
+    text-shadow: 1px 1px 1px rgba(255,255,255, .5);
+}
+.accordion > li:target > a {
+    color: #0B3731;
+    text-shadow: 1px 1px 1px rgba(255,255,255, .5);
+    background: #219E8C;
+    /*box-shadow: 0px 0px 5px 0px #000;*/
+}
+
+.ulSensors li {
+    border-top:solid 1px #0B3731;
+}
+
+.sub-view
+{
+}
+
+
+.accordion li > .sub-view {
+    height: 0;
+    overflow: hidden;
+    margin:0px 10px;
+
+/*    -webkit-transition: height, margin .4s ease-in-out;
+    -moz-transition: height .4s ease-in-out;
+    -o-transition: height .4s ease-in-out;
+    -ms-transition: height .4s ease-in-out;*/
+    transition: height .4s ease-in-out, margin-top .6s ease-out;
+}
+
+.accordion li:target > .sub-view {
+    height: 240px;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+    margin:10px 10px;
+
+    /*box-shadow: 0px 0px -50px 5px #000;*/
+}
+
+
+
+
+
+
