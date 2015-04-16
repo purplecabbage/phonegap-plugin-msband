@@ -1,3 +1,4 @@
+
 var exec = require('cordova/exec');
 var subscribers = {
 
@@ -68,9 +69,6 @@ var BandUVLightReading = {
 }
 
 
-
-
-
 var sensorEventNames = [
 	"accelerometer",
 	"gyroscope",
@@ -97,19 +95,42 @@ sensorEventNames.forEach(function(sensorEventName){
 });
 
 function onSensorUpdate(sensorEvent,res) {
-
+    console.log("onSensorUpdate::" + sensorEvent + "->" + JSON.stringify(res));
 }
 
 function onSensorError(sensorEvent,res) {
 
 }
+            
+               
+
 
 // TODO: Retrieve the Band Version Information
 // hardware version and firmware version
 
 
 module.exports = {
+    connect:function(success,fail){// todo: callbacks
+        function onConnectSuccess(res) {
+            success && success();
+        }
+               
+        function onConnectError(err) {
+            fail && fail();
+        }
+        exec(onConnectSuccess, onConnectError, "MSBandPlugin", "connect", []);
+    },
+   queryVersionInfo:function(win,lose) { // todo:callbacks
+		function onInfoSuccess(res) {
+			win && win(res);
+		}
+       
+		function onInfoError(err) {
+			lose && lose(err);
+		}
 
+        exec(onInfoSuccess, onInfoError, "MSBandPlugin", "queryVersionInfo", []);
+   },
 	sensor:{
 		on:function(sensorEvent,callback){
 			if(isValidSensorEvent(sensorEvent)) {
@@ -154,4 +175,3 @@ module.exports = {
 	
 
 }
-
