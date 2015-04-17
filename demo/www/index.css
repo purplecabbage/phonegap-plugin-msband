@@ -19,13 +19,14 @@ body {
 
 /*
     hilight color : 87E1D4
-    selected color: #219E8C
+    selected color: 219E8C
     default color : 12574D
     background dark: 0B3731;
+    177164
 */
 
 .headerBar {
-  height: 52px;
+  height: 48px;
   background: #0B3731;
   color: #fff;
 }
@@ -73,8 +74,88 @@ div.value{
     float:right;
 }
 
+.sensorControls {
+    border:solid 0px #fff;
+    clear:all;
+    height:40px;
+}
+
+.sensorControls label {
+    line-height:36px;  
+    font-size:18px; 
+}
+
+.sensorControls .onoffswitch {
+    float:right;
+}
+
+.sensorOutput {
+    background-color: #0B3731;
+    margin:0px 0px 5px 0px;
+    padding:0px 12px 0px 12px;
+    min-height:72px;
+    margin:12px 0px 18px 0px;
+}
+
+/* Switch Control */
+
+.onoffswitch {
+    position: relative; width: 96px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; 
+    overflow: hidden; 
+    cursor: pointer;
+    border: 2px solid #177164; 
+    width:92px;
+    border-radius: 0px;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    -moz-transition: margin 0.3s ease-in 0s; -webkit-transition: margin 0.3s ease-in 0s;
+    -o-transition: margin 0.3s ease-in 0s; transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; 
+    width: 48px; 
+    height: 32px; padding: 0; line-height: 32px;
+    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: "on";
+    padding-left: 5px;
+    background-color: #0B3731; color: #219E8C;
+}
+.onoffswitch-inner:after {
+    content: "off";
+    padding-right: 10px;
+    background-color: #0B3731; color: #177164;
+    text-align: right;
+}
+.onoffswitch-switch {
+    display: block; 
+    width: 36px; margin: 0px;
+    background: #219E8C;
+    border: 2px solid #177164; border-radius: 0px;
+    position: absolute; top: 0; bottom: 0; right: 56px;
+    -moz-transition: all 0.3s ease-in 0s; -webkit-transition: all 0.3s ease-in 0s;
+    -o-transition: all 0.3s ease-in 0s; transition: all 0.3s ease-in 0s; 
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px; 
+}
 
 
+
+/* Accordion Control */
 .accordion,
 .accordion ul,
 .accordion li,
@@ -134,6 +215,7 @@ div.value{
 
 .sub-view
 {
+
 }
 
 
@@ -150,7 +232,7 @@ div.value{
 }
 
 .accordion li:target > .sub-view {
-    height: 240px;
+    height: 300px;
     overflow:scroll;
     -webkit-overflow-scrolling: touch;
     margin:10px 10px;
