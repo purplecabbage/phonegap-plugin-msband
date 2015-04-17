@@ -16,4 +16,19 @@ function getBandInfo() {
     }
 }
 
+[swBandContact, swUV, swSkinTemp, swSteps, swDistance, swHR, swAccel, swGyro].forEach(function(elem){
+	elem.addEventListener('click',function(evt){
+		window.alert(evt.target.checked);
+	});
+});
+
+// txtBandContact
+// txtUV
+// txtSkinTemp
+// txtSteps
+// txtDistance
+// txtHR
+// txtAccel
+// txtGyro
+
 
