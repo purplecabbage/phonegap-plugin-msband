@@ -1,7 +1,6 @@
 
 
 
-
 document.addEventListener('deviceready', onDeviceReady);
 
 function onDeviceReady() {
@@ -18,7 +17,7 @@ function getBandInfo() {
 
 [swBandContact, swUV, swSkinTemp, swSteps, swDistance, swHR, swAccel, swGyro].forEach(function(elem){
 	elem.addEventListener('click',function(evt){
-		window.alert(evt.target.checked);
+		window.alert(evt.target.id + " : " + evt.target.checked);
 	});
 });
 

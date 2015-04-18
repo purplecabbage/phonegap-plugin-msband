@@ -25,6 +25,11 @@ body {
     177164
 */
 
+/* no scrollbars please */
+::-webkit-scrollbar {
+    display: none;
+}
+
 .headerBar {
   height: 48px;
   background: #0B3731;
@@ -167,9 +172,19 @@ div.value{
     outline: none;
 }
 
+/*#accWrap {
+    position: absolute;
+    top:48px;
+    bottom:0px;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+}*/
+
 .accordion {
     background:#12574D;
-    min-height:700px;
+    /*min-height:700px;*/
+    
+
 }
 
 .accordion li {
@@ -181,7 +196,7 @@ div.value{
     position: relative;
     min-width: 110px;
     padding: 20px 10px 0 40px;
-    height: 52px;
+    height: 48px;
     color: #21B09A;
     font-weight: bold;
     font-size:26px;
@@ -213,8 +228,7 @@ div.value{
     border-top:solid 1px #0B3731;
 }
 
-.sub-view
-{
+.sub-view {
 
 }
 
@@ -231,10 +245,13 @@ div.value{
     transition: height .4s ease-in-out, margin-top .6s ease-out;
 }
 
+
+
 .accordion li:target > .sub-view {
     height: 300px;
     overflow:scroll;
     -webkit-overflow-scrolling: touch;
+
     margin:10px 10px;
 
     /*box-shadow: 0px 0px -50px 5px #000;*/
