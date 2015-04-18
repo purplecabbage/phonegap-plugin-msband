@@ -23,4 +23,7 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
+    <feature name="MSBandPlugin">
+        <param name="ios-package" value="MSBandPlugin"/>
+    </feature>
 </widget>
