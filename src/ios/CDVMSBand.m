@@ -106,14 +106,68 @@
 
 - (void)watchSensor:(CDVInvokedUrlCommand*)command
 {
-    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    __block NSString* callbackId = [NSString stringWithString:command.callbackId ];
+    __block NSString* event = [NSString stringWithString:(NSString*)command.arguments[0]];
+    
+    
+    if([event compare:@"bandcontact"] == 0) {
+
+    }
+    else if([event compare:@"accelerometer"] == 0) {
+        [self.client.sensorManager startAccelerometerUpdatesToQueue:nil errorRef:nil withHandler:^(MSBSensorAccelData *accelerometerData, NSError *error) {
+            
+            
+            NSMutableDictionary* accelProps = [NSMutableDictionary dictionaryWithCapacity:4];
+            
+            [accelProps setValue:[NSNumber numberWithDouble:accelerometerData.x] forKey:@"x"];
+            [accelProps setValue:[NSNumber numberWithDouble:accelerometerData.y] forKey:@"y"];
+            [accelProps setValue:[NSNumber numberWithDouble:accelerometerData.z] forKey:@"z"];
+            [accelProps setValue:[NSNumber numberWithDouble:([[NSDate date] timeIntervalSince1970] * 1000)] forKey:@"timestamp"];
+            
+            NSMutableDictionary* payload = [NSMutableDictionary dictionaryWithCapacity:4];
+            [payload setValue:event forKey:@"event"];
+            [payload setValue:accelProps forKey:@"reading"];
+            
+            
+            
+            CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:payload];
+            [result setKeepCallback:[NSNumber numberWithBool:YES]];
+            [self.commandDelegate sendPluginResult:result callbackId:callbackId];
+        }];
+        
+    }
+    else if([event compare:@"gyroscope"] == 0) {
+        
+    }
+    else if([event compare:@"distance"] == 0) {
+        
+    }
+    else if([event compare:@"heartrate"] == 0) {
+        
+    }
+    else if([event compare:@"pedometer"] == 0) {
+        
+    }
+    else if([event compare:@"skintemperature"] == 0) {
+        
+    }
+    else if([event compare:@"uvlevel"] == 0) {
+        
+    }
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+//        [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
+//    });
 }
 
 - (void)unwatchSensor:(CDVInvokedUrlCommand*)command
 {
-    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    __block NSString* callbackId = [NSString stringWithString:command.callbackId ];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
+    });
 }
 
 @end

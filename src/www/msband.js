@@ -83,7 +83,7 @@ var sensorEventNames = [
 function isValidSensorEvent(sensorEvent) {
 	return (!sensorEvent || 
 			!sensorEvent.toLowerCase ||
-			sensorEventNames.indexOf(sensorEvent.toLowerCase()) < 0);
+			sensorEventNames.indexOf(sensorEvent.toLowerCase()) > -1);
 }
 
 
@@ -94,12 +94,16 @@ sensorEventNames.forEach(function(sensorEventName){
 	sensorCallbacks[sensorEventName] = [];
 });
 
-function onSensorUpdate(sensorEvent,res) {
-    console.log("onSensorUpdate::" + sensorEvent + "->" + JSON.stringify(res));
+function onSensorUpdate(result) {
+    var eventName = result.event;
+    var reading = result.reading;
+    sensorCallbacks[eventName].forEach(function(cb){
+    	cb(reading);
+    });
 }
 
 function onSensorError(sensorEvent,res) {
-
+	alert("onSensorError::" + JSON.stringify(sensorEvent));
 }
             
                
@@ -120,7 +124,7 @@ module.exports = {
         }
         exec(onConnectSuccess, onConnectError, "MSBandPlugin", "connect", []);
     },
-   queryVersionInfo:function(win,lose) { // todo:callbacks
+    queryVersionInfo:function(win,lose) { // todo:callbacks
 		function onInfoSuccess(res) {
 			win && win(res);
 		}
@@ -130,27 +134,29 @@ module.exports = {
 		}
 
         exec(onInfoSuccess, onInfoError, "MSBandPlugin", "queryVersionInfo", []);
-   },
-	sensor:{
+    },
+	sensors:{
 		on:function(sensorEvent,callback){
+			//alert("sensorEvent :: " + sensorEvent);
 			if(isValidSensorEvent(sensorEvent)) {
 				sensorEvent = sensorEvent.toLowerCase();
-				if(sensorCallbacks[sensorEvent].length) {
+				//if(sensorCallbacks[sensorEvent].length) {
 					if(sensorCallbacks[sensorEvent].indexOf(callback) > -1) {
-						console.log("Sensor Add Error - Sensor callback already exists : " + sensorEvent);
+						alert("Sensor Add Error - Sensor callback already exists : " + sensorEvent);
 					}
 					else {
 						sensorCallbacks[sensorEvent].push(callback);
+						//alert("sensorCallbacks[sensorEvent].length = " + sensorCallbacks[sensorEvent].length);
 						if(sensorCallbacks[sensorEvent].length === 1) {
 							// only exec the native code if we go from 0->1
 							// otherwise, we'll just notify the next time we receive a message
 							exec(onSensorUpdate, onSensorError, "MSBandPlugin", "watchSensor", [sensorEvent]);
 						}
 					}
-				}
+				//}
 			}
 			else {
-				console.log("Sensor Add Error - Invalid Sensor : " + sensorEvent);
+				alert("Sensor Add Error - Invalid Sensor : " + sensorEvent);
 			}
 		},
 		un:function(sensorEvent,callback){
@@ -164,7 +170,6 @@ module.exports = {
 						// only exec the native code if we go from 1->0
 						exec(null, null, "MSBandPlugin", "unwatchSensor", [sensorEvent]);
 					}
-
 				}
 			}
 			else {
@@ -172,6 +177,4 @@ module.exports = {
 			}
 		}
 	}
-	
-
 }
