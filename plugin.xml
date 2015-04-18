@@ -37,8 +37,8 @@
     <!-- ios -->
     <platform name="ios">
         <config-file target="config.xml" parent="/*">
-            <feature name="MSBand">
-                <param name="ios-package" value="MSBand"/>
+            <feature name="MSBandPlugin">
+                <param name="ios-package" value="MSBandPlugin"/>
             </feature>
         </config-file>
 
