@@ -5,7 +5,6 @@ window.onerror = function(err,fn,ln) {
 }
 
 
-
 // map/list of switchIds to event names, to output txt divs, so we can create listeners in a loop
 var targetIds = {"swBandContact": { evtName:"bandcontact"	 ,txtOutId:"txtBandContact"},
 				 "swUV"			: { evtName:"uvlevel"		 ,txtOutId:"txtUV"},
@@ -15,6 +14,7 @@ var targetIds = {"swBandContact": { evtName:"bandcontact"	 ,txtOutId:"txtBandCon
 				 "swHR"			: { evtName:"heartrate"		 ,txtOutId:"txtHR"},
 				 "swAccel"		: { evtName:"accelerometer"	 ,txtOutId:"txtAccel"},
 				 "swGyro"		: { evtName:"gyroscope"		 ,txtOutId:"txtGyro"}};
+
 var isBandConnected = false;
 
 
@@ -28,6 +28,7 @@ function onDeviceReady() {
 		});
 	});
 	btnGetBandInfo.addEventListener("click",getBandInfo);
+    btnStopAllEvents.addEventListener("click",stopAllSensors);
 	msband.connect(onBandConnectSuccess,onBandConnectError);
 }   
 
@@ -39,12 +40,18 @@ function onBandConnectError(err) {
 	isBandConnected = false;
 }
 
+function stopAllSensors() {
+    msband.stopAllSensors();
+}
+
 function onGotVersionInfoSuccess(evt) {
-	alert(JSON.stringify(evt));
+    pFirmwareVersion.innerText = evt.frameworkVersion;
+    pHardwareVersion.innerText = evt.hardwareVersion;
+
 }
 
 function onGotVersionInfoError(err) {
-	alert("err: " + JSON.stringify(err));
+	alert("onGotVersionInfoError:err: " + JSON.stringify(err));
 }
 
 function getBandInfo() {
@@ -58,14 +65,19 @@ function getBandInfo() {
 
 function createCallback(txtOutId) {
 	return function(evt) {
-		document.getElementById(txtOutId).innerText = JSON.stringify(evt);
+        var output = "";
+        for(var v in evt){
+            output += v + ":" + evt[v] + "<br>";
+        }
+        document.getElementById(txtOutId).innerHTML = output;
 	}
 }
 
 function subscribeSwitchClicked(id,isOn) {
 	var targetSensor = targetIds[id];
 	if(isOn) {
-		targetSensor.callback = createCallback(id);
+        document.getElementById(targetSensor.txtOutId).innerText = "subscribing to event : " + targetSensor.evtName;
+		targetSensor.callback = createCallback(targetSensor.txtOutId);
 		msband.sensors.on(targetSensor.evtName,targetSensor.callback);
 	}
 	else {
