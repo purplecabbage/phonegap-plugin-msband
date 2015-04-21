@@ -176,5 +176,11 @@ module.exports = {
 				console.log("Sensor Remove Error - Invalid Sensor : " + sensorEvent);
 			}
 		}
+	},
+	vibrate:function(){
+		exec(null, null, "MSBandPlugin", "vibrate", []);
+	},
+	stopAllSensors:function(){
+		//sensorEventNames.forEach(...)
 	}
 }
