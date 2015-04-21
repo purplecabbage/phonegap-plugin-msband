@@ -14,4 +14,7 @@
 
 - (void)unwatchSensor:(CDVInvokedUrlCommand*)command;
 
+- (void)vibrate:(CDVInvokedUrlCommand*)command;
+
+
 @end

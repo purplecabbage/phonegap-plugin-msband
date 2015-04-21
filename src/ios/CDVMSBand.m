@@ -66,8 +66,7 @@
     __block NSString* callbackId = [NSString stringWithString:command.callbackId ];
     
 	// gets firmwareVersion and hardwareVersion
- 	[weakClient firmwareVersionWithCompletionHandler:^(NSString *version,
-        NSError *error){
+ 	[weakClient firmwareVersionWithCompletionHandler:^(NSString *version, NSError *error){
         // create a dictionary to hold our results
         NSMutableDictionary* versionInfo = [NSMutableDictionary dictionaryWithCapacity:2];
         if (error) {
@@ -81,7 +80,7 @@
             // handle success
             // set the frameworkVersion, and go get the hardware version
             [versionInfo setObject:[NSString stringWithString:version] forKey:@"frameworkVersion"];
-            [weakClient hardwareVersionWithCompletionHandler:^(NSString *hwVersion,                                                NSError *error){
+            [weakClient hardwareVersionWithCompletionHandler:^(NSString *hwVersion, NSError *error){
                 if (error) {
                     // handle error
                     dispatch_async(dispatch_get_main_queue(), ^{
@@ -106,7 +105,7 @@
 
 - (void)watchSensor:(CDVInvokedUrlCommand*)command
 {
-    // calories is a thing too
+// calories is a thing too
 //
 //            [self.client.sensorManager startCaloriesUpdatesToQueue:<#(NSOperationQueue *)#> errorRef:<#(NSError *__autoreleasing *)#> withHandler:<#^(MSBSensorCaloriesData *caloriesData, NSError *error)handler#>
     
@@ -124,7 +123,7 @@
             NSMutableDictionary* payload = [NSMutableDictionary dictionaryWithCapacity:4];
             [payload setValue:event forKey:@"event"];
             [payload setValue:reading forKey:@"reading"];
-            
+
             CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:payload];
             [result setKeepCallback:[NSNumber numberWithBool:YES]];
             [self.commandDelegate sendPluginResult:result callbackId:callbackId];
@@ -145,12 +144,10 @@
             [payload setValue:event forKey:@"event"];
             [payload setValue:reading forKey:@"reading"];
             
-            
             CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:payload];
             [result setKeepCallback:[NSNumber numberWithBool:YES]];
             [self.commandDelegate sendPluginResult:result callbackId:callbackId];
         }];
-        
     }
     else if([event compare:@"gyroscope"] == 0) {
         [self.client.sensorManager startGyroscopeUpdatesToQueue:nil errorRef:nil withHandler:^(MSBSensorGyroData *accelGyroData, NSError *error) {
@@ -166,12 +163,10 @@
             [payload setValue:event forKey:@"event"];
             [payload setValue:reading forKey:@"reading"];
             
-            
             CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:payload];
             [result setKeepCallback:[NSNumber numberWithBool:YES]];
             [self.commandDelegate sendPluginResult:result callbackId:callbackId];
-        }];
-        
+        }]; 
     }
     else if([event compare:@"distance"] == 0) {
         [self.client.sensorManager startDistanceUpdatesToQueue:nil errorRef:nil withHandler:^(MSBSensorDistanceData *distanceData, NSError *error) {
@@ -193,7 +188,6 @@
             [self.commandDelegate sendPluginResult:result callbackId:callbackId];
 
         }];
-     
     }
     else if([event compare:@"heartrate"] == 0) {
         [self.client.sensorManager startHearRateUpdatesToQueue:nil errorRef:nil withHandler:^(MSBSensorHeartRateData *heartRateData, NSError *error) {
@@ -274,9 +268,8 @@
 
 - (void)unwatchSensor:(CDVInvokedUrlCommand*)command
 {
-    __block NSString* callbackId = [NSString stringWithString:command.callbackId ];
-    __block NSString* event = [NSString stringWithString:(NSString*)command.arguments[0]];
-    
+    NSString* callbackId = [NSString stringWithString:command.callbackId ];
+    NSString* event = [NSString stringWithString:(NSString*)command.arguments[0]];
     
     if([event compare:@"bandcontact"] == 0) {
         [self.client.sensorManager stopBandContactUpdatesErrorRef:nil];
@@ -303,10 +296,34 @@
         [self.client.sensorManager stopUVUpdatesErrorRef:nil];
     }
     
-    dispatch_async(dispatch_get_main_queue(), ^{
+    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
+
+}
+
+- (void)vibrate:(CDVInvokedUrlCommand*)command
+{
+    NSString* callbackId = [NSString stringWithString:command.callbackId ];
+    // send a vibration request of type alert alarm to the Band
+    /*
+     MSBVibrationTypeNotificationOneTone = 0x07,
+     MSBVibrationTypeNotificationTwoTone = 0x10,
+     MSBVibrationTypeNotificationAlarm   = 0x11,
+     MSBVibrationTypeNotificationTimer   = 0x12,
+     MSBVibrationTypeOneToneHigh         = 0x1B,
+     MSBVibrationTypeTwoToneHigh         = 0x1D,
+     MSBVibrationTypeThreeToneHigh       = 0x1C,
+     MSBVibrationTypeRampUp              = 0x05,
+     MSBVibrationTypeRampDown            = 0x04
+     */
+    [self.client.notificationManager vibrateWithType:MSBVibrationTypeNotificationOneTone
+                                     completionHandler:^(NSError *error) {
+        if (error){
+            // TODO: handle error
+        }
         CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
-    });
+    }];
 }
 
 @end
