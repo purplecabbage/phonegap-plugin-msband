@@ -144,6 +144,16 @@ module.exports = {
 // - (void)setPages:(NSArray *)pageData tileId:(NSUUID *)tileId completionHandler:(void (^)(NSError *error))completionHandler;
 // - (void)removePagesInTile:(NSUUID *)tileId completionHandler:(void (^)(NSError *error))completionHandler;
 
+		addTile:function(win,lose,name,imgSm,imgLg,tileId) {
+	        function onAddTileSuccess(res) {
+	            success && success(res);
+	        }
+	               
+	        function onAddTileError(err) {
+	            fail && fail(err);
+	        }
+	        exec(onAddTileSuccess, onAddTileError, "MSBandPlugin", "addTile", [name,imgSm,imgLg,tileId]);
+		}
     },
     personalization:{
     	getCurrentTheme:function(win,lose) {

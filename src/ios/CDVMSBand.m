@@ -326,4 +326,61 @@
     }];
 }
 
+- (void)addTile:(CDVInvokedUrlCommand*)command
+{
+    /*
+ * @param tileId        A unique identifier for the tile.
+ * @param tileName      The display name of the tile.
+ * @param tileIcon      The main tile icon.
+ * @param smallIcon     The icon to be used in notifications and badging.
+    */
+    __block NSString* callbackId = [NSString stringWithString:command.callbackId ];
+    
+    NSString* tileName = [NSString stringWithString:(NSString*)command.arguments[0]];
+    NSString* iconFilePath = [NSString stringWithString:(NSString*)command.arguments[1]];
+    NSString* smIconFilePath = [NSString stringWithString:(NSString*)command.arguments[2]];
+    
+    NSUUID *tileID = [[NSUUID alloc] initWithUUIDString:(NSString*)command.arguments[3]];
+    
+    NSError* err;
+    UIImage* tileImg = [UIImage imageNamed:iconFilePath];
+    MSBIcon *tileIcon = [MSBIcon iconWithUIImage:tileImg error:&err];
+    if(err) {
+        NSLog(@"Error: %@", err.localizedDescription);
+        // todo: return error to js
+        return;
+    }
+    
+    UIImage* smallImg = [UIImage imageNamed:smIconFilePath];
+    MSBIcon *smallIcon = [MSBIcon iconWithUIImage:smallImg error:&err];
+    if(err) {
+        NSLog(@"Error: %@", err.localizedDescription);
+        // todo: return error to js
+        return;
+    }
+    
+    MSBTile *tile = [MSBTile tileWithId:tileID name:tileName tileIcon:tileIcon smallIcon:smallIcon error:&err];
+    
+    if(err) {
+        NSLog(@"Error: %@", err.localizedDescription);
+        // todo: return error to js
+    }
+    else {
+        
+        [self.client.tileManager addTile:tile completionHandler:^(NSError *error) {
+            if (!error)
+            {
+                CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+                [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
+            }
+            else
+            {
+                // todo: check if error.code == MSBErrorCodeTileAlreadyExist
+                // todo: return error to js
+
+            }
+        }];
+    }
+}
+
 @end
