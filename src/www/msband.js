@@ -135,6 +135,45 @@ module.exports = {
 
         exec(onInfoSuccess, onInfoError, "MSBandPlugin", "queryVersionInfo", []);
     },
+    tiles:{
+// - (void)tilesWithCompletionHandler:(void(^)(NSArray *tiles, NSError *error))completionHandler;
+// - (void)addTile:(MSBTile *)tile completionHandler:(void(^)(NSError *error))completionHandler;
+// - (void)removeTile:(MSBTile *)tile completionHandler:(void(^)(NSError *error))completionHandler;
+// - (void)removeTileWithId:(NSUUID *)tileId completionHandler:(void (^)(NSError *error))completionHandler;
+// - (void)remainingTileCapacityWithCompletionHandler:(void (^)(NSUInteger remainingCapacity, NSError *error))completionHandler;
+// - (void)setPages:(NSArray *)pageData tileId:(NSUUID *)tileId completionHandler:(void (^)(NSError *error))completionHandler;
+// - (void)removePagesInTile:(NSUUID *)tileId completionHandler:(void (^)(NSError *error))completionHandler;
+
+    },
+    personalization:{
+    	getCurrentTheme:function(win,lose) {
+
+    	},
+    	setCurrentTheme:function(win,lose,theme) {
+
+    	},
+    	getMeTile:function(win,lose) {
+
+    	},
+    	setMeTile:function(win,lose,image) {
+
+    	}
+    },
+    notification:{
+    	vibrate:function(){
+    		// TODO: add different vibe types
+    		exec(null, null, "MSBandPlugin", "vibrate", []);
+    	},
+    	showDialogWithTileID:function(){
+
+    	},
+    	sendMessageWithTileID:function(){
+
+    	},
+    	registerNotificationWithTileID:function(){
+
+    	}
+    },
 	sensors:{
 		on:function(sensorEvent,callback){
 			//alert("sensorEvent :: " + sensorEvent);
@@ -186,11 +225,5 @@ module.exports = {
                 }
             });
         }
-	},
-	vibrate:function(){
-		exec(null, null, "MSBandPlugin", "vibrate", []);
-	},
-	stopAllSensors:function(){
-		//sensorEventNames.forEach(...)
 	}
 }
