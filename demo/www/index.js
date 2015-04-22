@@ -34,10 +34,12 @@ function onDeviceReady() {
 
 function onBandConnectSuccess(evt) {
 	isBandConnected = true;
+    bandIcon.src="img/iconWhite64-2x.png";
 }
 
 function onBandConnectError(err) {
 	isBandConnected = false;
+    bandIcon.src="img/iconBlack64-2x.png";
 }
 
 function stopAllSensors() {

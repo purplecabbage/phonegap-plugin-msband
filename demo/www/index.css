@@ -44,6 +44,13 @@ body {
   margin-top:10px;
 }
 
+#bandIcon {
+    width:32px;
+    height:32px;
+    float:right;
+    clear:none;
+}
+
 
 .actionButton {
   border: 1px solid #134f7f;
