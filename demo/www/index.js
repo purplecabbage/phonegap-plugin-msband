@@ -41,7 +41,11 @@ function onBandConnectError(err) {
 }
 
 function stopAllSensors() {
-    msband.stopAllSensors();
+    msband.sensors.stopAllSensors();
+    var checkBoxes = document.querySelectorAll(".onoffswitch-checkbox");
+    Array.prototype.slice.call(checkBoxes).forEach(function(elem) {
+        elem.checked = false;
+    });
 }
 
 function onGotVersionInfoSuccess(evt) {

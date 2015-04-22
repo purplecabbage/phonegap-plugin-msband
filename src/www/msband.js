@@ -175,7 +175,17 @@ module.exports = {
 			else {
 				console.log("Sensor Remove Error - Invalid Sensor : " + sensorEvent);
 			}
-		}
+		},
+		stopAllSensors:function(){
+           var sensor = this;
+           sensorEventNames.forEach(function(evtName){
+                if(sensorCallbacks[evtName] && sensorCallbacks[evtName].length) {
+                    sensorCallbacks[evtName].forEach(function(cb) {
+                        sensor.un(evtName,cb);
+                    });
+                }
+            });
+        }
 	},
 	vibrate:function(){
 		exec(null, null, "MSBandPlugin", "vibrate", []);
