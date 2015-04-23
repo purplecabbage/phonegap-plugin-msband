@@ -29,6 +29,7 @@ function onDeviceReady() {
 	});
 	btnGetBandInfo.addEventListener("click",getBandInfo);
     btnStopAllEvents.addEventListener("click",stopAllSensors);
+    btnCreateTile.addEventListener("click",createTile);
 	msband.connect(onBandConnectSuccess,onBandConnectError);
 }   
 
@@ -90,6 +91,26 @@ function subscribeSwitchClicked(id,isOn) {
 		msband.sensors.un(targetSensor.evtName,targetSensor.callback);
 		targetSensor.callback = null;
 	}
+}
+
+function createTile() {
+	var tileName = "PhoneGap";
+
+	var smIconImg = "www/pgBandIcons/24x24.png";
+	var lgIconImg = "www/pgBandIcons/46x46.png";
+	var tileId = "3de787e9-62d2-430b-ae12-5be4a16606e8";
+
+	function onCreateTileSuccess() {
+		alert("onCreateTileSuccess");
+	}
+
+	function onCreateTileError(err) {
+		alert("onCreateTileError::" + err);
+	}
+
+	msband.tiles.addTile(onCreateTileSuccess,onCreateTileError,tileName,smIconImg,lgIconImg,tileId);
+
+
 }
 
 
