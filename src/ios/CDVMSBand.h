@@ -9,12 +9,12 @@
 
 - (void)queryVersionInfo:(CDVInvokedUrlCommand*)command;
 
-
 - (void)watchSensor:(CDVInvokedUrlCommand*)command;
 
 - (void)unwatchSensor:(CDVInvokedUrlCommand*)command;
 
 - (void)vibrate:(CDVInvokedUrlCommand*)command;
+
 
 
 @end

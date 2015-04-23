@@ -336,11 +336,11 @@
     */
     __block NSString* callbackId = [NSString stringWithString:command.callbackId ];
     
-    NSString* tileName = [NSString stringWithString:(NSString*)command.arguments[0]];
-    NSString* iconFilePath = [NSString stringWithString:(NSString*)command.arguments[1]];
-    NSString* smIconFilePath = [NSString stringWithString:(NSString*)command.arguments[2]];
+    NSUUID *tileId = [[NSUUID alloc] initWithUUIDString:(NSString*)command.arguments[0]];
+    NSString* tileName = [NSString stringWithString:(NSString*)command.arguments[1]];
+    NSString* iconFilePath = [NSString stringWithString:(NSString*)command.arguments[2]];
+    NSString* smIconFilePath = [NSString stringWithString:(NSString*)command.arguments[3]];
     
-    NSUUID *tileID = [[NSUUID alloc] initWithUUIDString:(NSString*)command.arguments[3]];
     
     NSError* err;
     UIImage* tileImg = [UIImage imageNamed:iconFilePath];
@@ -359,7 +359,7 @@
         return;
     }
     
-    MSBTile *tile = [MSBTile tileWithId:tileID name:tileName tileIcon:tileIcon smallIcon:smallIcon error:&err];
+    MSBTile *tile = [MSBTile tileWithId:tileId name:tileName tileIcon:tileIcon smallIcon:smallIcon error:&err];
     
     if(err) {
         NSLog(@"Error: %@", err.localizedDescription);
@@ -368,19 +368,75 @@
     else {
         
         [self.client.tileManager addTile:tile completionHandler:^(NSError *error) {
-            if (!error)
-            {
-                CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-                [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
-            }
-            else
+            if (error)
             {
                 // todo: check if error.code == MSBErrorCodeTileAlreadyExist
                 // todo: return error to js
-
+            }
+            else
+            {
+                CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+                [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
             }
         }];
     }
 }
 
+- (void)removeTile:(CDVInvokedUrlCommand*)command
+{
+    __block NSString* callbackId = [NSString stringWithString:command.callbackId ];
+    NSUUID *tileId = [[NSUUID alloc] initWithUUIDString:(NSString*)command.arguments[0]];
+    
+    [self.client.tileManager removeTileWithId:tileId completionHandler:^(NSError *error) {
+        if(error) {
+            
+        }
+        else {
+            CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
+        }
+    }];
+}
+
+/*
+- (void)tilesWithCompletionHandler:(void(^)(NSArray *tiles, NSError *error))completionHandler;
+- (void)setPages:(NSArray *)pageData tileId:(NSUUID *)tileId completionHandler:(void (^)(NSError *error))completionHandler;
+- (void)removePagesInTile:(NSUUID *)tileId completionHandler:(void (^)(NSError *error))completionHandler;
+*/
+
+-(void)sendMesageWithTileId:(CDVInvokedUrlCommand*)command
+{
+    __block NSString* callbackId = [NSString stringWithString:command.callbackId ];
+    NSUUID *tileId = [[NSUUID alloc] initWithUUIDString:(NSString*)command.arguments[0]];
+    
+    NSString* title = [NSString stringWithString:(NSString*)command.arguments[1]];
+    NSString* body = [NSString stringWithString:(NSString*)command.arguments[2]];
+    
+    [self.client.notificationManager sendMessageWithTileID:tileId title:title body:body timeStamp:[NSDate date] flags:MSBNotificationMessageFlagsNone completionHandler:^(NSError *error) {
+        if (!error) {
+            //[self output:@"Successfully Finished!!! You can remove tile via Microsoft Health App."];
+        }
+        else
+        {
+           // [self output:error.localizedDescription];
+        }
+    }];
+
+}
+
+- (void)getRemainingTileCapacity:(CDVInvokedUrlCommand*)command
+{
+    __block NSString* callbackId = [NSString stringWithString:command.callbackId ];
+    
+    [self.client.tileManager remainingTileCapacityWithCompletionHandler:^(NSUInteger remainingCapacity, NSError *error) {
+        if(!error){
+            CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsInt:(int)remainingCapacity];
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
+        }
+        else {
+            
+        }
+    }];
+    
+}
 @end

@@ -16,7 +16,8 @@ var targetIds = {"swBandContact": { evtName:"bandcontact"	 ,txtOutId:"txtBandCon
 				 "swGyro"		: { evtName:"gyroscope"		 ,txtOutId:"txtGyro"}};
 
 var isBandConnected = false;
-
+// used to demo various tile apis
+var tileId = "3de787e9-62d2-430b-ae12-5be4a16606e8";
 
 document.addEventListener('deviceready', onDeviceReady);
 
@@ -30,6 +31,10 @@ function onDeviceReady() {
 	btnGetBandInfo.addEventListener("click",getBandInfo);
     btnStopAllEvents.addEventListener("click",stopAllSensors);
     btnCreateTile.addEventListener("click",createTile);
+    btnGetTileSlots.addEventListener("click",onBtnGetTileSlots);
+    btnSendTileMessage.addEventListener("click",onBtnSendTileMessage);
+    btnRemoveTile.addEventListener("click",onBtnRemoveTile);
+
 	msband.connect(onBandConnectSuccess,onBandConnectError);
 }   
 
@@ -94,11 +99,10 @@ function subscribeSwitchClicked(id,isOn) {
 }
 
 function createTile() {
+	
 	var tileName = "PhoneGap";
-
 	var smIconImg = "www/pgBandIcons/24x24.png";
 	var lgIconImg = "www/pgBandIcons/46x46.png";
-	var tileId = "3de787e9-62d2-430b-ae12-5be4a16606e8";
 
 	function onCreateTileSuccess() {
 		alert("onCreateTileSuccess");
@@ -108,9 +112,41 @@ function createTile() {
 		alert("onCreateTileError::" + err);
 	}
 
-	msband.tiles.addTile(onCreateTileSuccess,onCreateTileError,tileName,lgIconImg,smIconImg,tileId);
+	msband.tiles.addTile(onCreateTileSuccess,onCreateTileError,tileId,tileName,lgIconImg,smIconImg);
+}
 
+function onBtnGetTileSlots() {
+	function onGetTileCountSuccess(res) {
+		alert("onGetTileCountSuccess :: " + res);
+	}
 
+	function onGetTileCountError(err) {
+		alert("onGetTileCountError::" + err);
+	}
+
+	msband.tiles.getRemainingTileCapacity(onGetTileCountSuccess,onGetTileCountError);
+}
+
+function onBtnSendTileMessage(){
+	function success(res) {
+		alert("onBtnSendTileMessage Success " + res);
+	}
+	function error(err) {
+		alert("onBtnSendTileMessage Error " + err);
+	}
+
+	msband.tiles.sendMesageWithTileId(success,error,tileId,"Title","Body body body body");
+}
+
+function onBtnRemoveTile(){
+	function success(res) {
+		alert("onBtnRemoveTile Success " + res);
+	}
+	function error(err) {
+		alert("onBtnRemoveTile Error " + err);
+	}
+
+	msband.tiles.removeTile(success,error,tileId);
 }
 
 

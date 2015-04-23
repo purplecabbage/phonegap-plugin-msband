@@ -144,15 +144,54 @@ module.exports = {
 // - (void)setPages:(NSArray *)pageData tileId:(NSUUID *)tileId completionHandler:(void (^)(NSError *error))completionHandler;
 // - (void)removePagesInTile:(NSUUID *)tileId completionHandler:(void (^)(NSError *error))completionHandler;
 
-		addTile:function(win,lose,name,imgLg,imgSm,tileId) {
+		addTile:function(win,lose,tileId,name,imgLg,imgSm) {
 	        function onAddTileSuccess(res) {
-	            success && success(res);
+	            win && win(res);
 	        }
 	               
 	        function onAddTileError(err) {
 	            fail && fail(err);
 	        }
-	        exec(onAddTileSuccess, onAddTileError, "MSBandPlugin", "addTile", [name,imgLg,imgSm,tileId]);
+	        exec(onAddTileSuccess, onAddTileError, "MSBandPlugin", "addTile", [tileId,name,imgLg,imgSm]);
+		},
+		removeTile:function(win,lose,tileId){
+	        function onSuccess(res) {
+	            win && win(res);
+	        }
+	               
+	        function onError(err) {
+	            fail && fail(err);
+	        }
+	        exec(onSuccess, onError, "MSBandPlugin", "removeTile", [tileId]);
+		},
+		sendMesageWithTileId:function(win,lose,tileId,title,body){
+	        function onSuccess(res) {
+	            win && win(res);
+	        }
+	               
+	        function onError(err) {
+	            fail && fail(err);
+	        }
+	        exec(onSuccess, onError, "MSBandPlugin", "sendMesageWithTileId", [tileId,title,body]);
+		},
+		showDialogWithTileId:function(win,lose,tileId,title,body){
+	        function onSuccess(res) {
+	            win && win(res);
+	        }
+	               
+	        function onError(err) {
+	            fail && fail(err);
+	        }
+		},
+		getRemainingTileCapacity:function(win,lose){
+			function onGetRemTileSuccess(res) {
+	            win && win(res);
+	        }
+	               
+	        function onGetRemTileError(err) {
+	            fail && fail(err);
+	        }
+			exec(onGetRemTileSuccess, onGetRemTileError, "MSBandPlugin", "getRemainingTileCapacity", []);
 		}
     },
     personalization:{
