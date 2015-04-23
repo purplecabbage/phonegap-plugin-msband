@@ -108,7 +108,7 @@ function createTile() {
 		alert("onCreateTileError::" + err);
 	}
 
-	msband.tiles.addTile(onCreateTileSuccess,onCreateTileError,tileName,smIconImg,lgIconImg,tileId);
+	msband.tiles.addTile(onCreateTileSuccess,onCreateTileError,tileName,lgIconImg,smIconImg,tileId);
 
 
 }

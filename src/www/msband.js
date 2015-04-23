@@ -144,7 +144,7 @@ module.exports = {
 // - (void)setPages:(NSArray *)pageData tileId:(NSUUID *)tileId completionHandler:(void (^)(NSError *error))completionHandler;
 // - (void)removePagesInTile:(NSUUID *)tileId completionHandler:(void (^)(NSError *error))completionHandler;
 
-		addTile:function(win,lose,name,imgSm,imgLg,tileId) {
+		addTile:function(win,lose,name,imgLg,imgSm,tileId) {
 	        function onAddTileSuccess(res) {
 	            success && success(res);
 	        }
@@ -152,7 +152,7 @@ module.exports = {
 	        function onAddTileError(err) {
 	            fail && fail(err);
 	        }
-	        exec(onAddTileSuccess, onAddTileError, "MSBandPlugin", "addTile", [name,imgSm,imgLg,tileId]);
+	        exec(onAddTileSuccess, onAddTileError, "MSBandPlugin", "addTile", [name,imgLg,imgSm,tileId]);
 		}
     },
     personalization:{
