@@ -68,7 +68,15 @@
 	// gets firmwareVersion and hardwareVersion
  	[weakClient firmwareVersionWithCompletionHandler:^(NSString *version, NSError *error){
         // create a dictionary to hold our results
-        NSMutableDictionary* versionInfo = [NSMutableDictionary dictionaryWithCapacity:2];
+        NSMutableDictionary* versionInfo = [NSMutableDictionary dictionaryWithCapacity:7];
+        
+        versionInfo[@"maxMessageTitle"] = @(MSBNotificationMessageTitleLengthMax);
+        versionInfo[@"maxMessageBody"] = @(MSBNotificationMessageBodyLengthMax);
+        versionInfo[@"maxDialogTitle"] = @(MSBNotificationDialogTitleLengthMax);
+        versionInfo[@"maxDialogBody"] = @(MSBNotificationDialogBodyLengthMax);
+        versionInfo[@"maxTileName"] = @(MSBTileNameMaxLength);
+        
+        
         if (error) {
             // handle error
             dispatch_async(dispatch_get_main_queue(), ^{
