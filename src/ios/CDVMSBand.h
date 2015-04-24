@@ -7,7 +7,7 @@
 
 }
 
-- (void)queryVersionInfo:(CDVInvokedUrlCommand*)command;
+- (void)queryBandInfo:(CDVInvokedUrlCommand*)command;
 
 - (void)watchSensor:(CDVInvokedUrlCommand*)command;
 

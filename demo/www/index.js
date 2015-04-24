@@ -68,7 +68,7 @@ function onGotVersionInfoError(err) {
 
 function getBandInfo() {
     if(isBandConnected) {
-    	msband.queryVersionInfo(onGotVersionInfoSuccess,onGotVersionInfoError);
+    	msband.queryBandInfo(onGotVersionInfoSuccess,onGotVersionInfoError);
     }
     else {
     	alert("oops, band is not connected");

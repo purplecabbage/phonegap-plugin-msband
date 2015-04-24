@@ -114,17 +114,17 @@ function onSensorError(sensorEvent,res) {
 
 
 module.exports = {
-    connect:function(success,fail){// todo: callbacks
+    connect:function(win,lose){// todo: callbacks
         function onConnectSuccess(res) {
-            success && success();
+            win && win();
         }
                
         function onConnectError(err) {
-            fail && fail();
+            lose && lose();
         }
         exec(onConnectSuccess, onConnectError, "MSBandPlugin", "connect", []);
     },
-    queryVersionInfo:function(win,lose) { // todo:callbacks
+    queryBandInfo:function(win,lose) { // todo:callbacks
 		function onInfoSuccess(res) {
 			win && win(res);
 		}
@@ -133,7 +133,7 @@ module.exports = {
 			lose && lose(err);
 		}
 
-        exec(onInfoSuccess, onInfoError, "MSBandPlugin", "queryVersionInfo", []);
+        exec(onInfoSuccess, onInfoError, "MSBandPlugin", "queryBandInfo", []);
     },
     tiles:{
 // - (void)tilesWithCompletionHandler:(void(^)(NSArray *tiles, NSError *error))completionHandler;

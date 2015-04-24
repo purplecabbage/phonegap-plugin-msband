@@ -60,7 +60,7 @@
 }
 
 
-- (void)queryVersionInfo:(CDVInvokedUrlCommand*)command 
+- (void)queryBandInfo:(CDVInvokedUrlCommand*)command
 {
     __weak MSBClient* weakClient = self.client;
     __block NSString* callbackId = [NSString stringWithString:command.callbackId ];
