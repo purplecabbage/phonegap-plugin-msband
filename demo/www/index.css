@@ -30,6 +30,15 @@ body {
     display: none;
 }
 
+input[type=text], textarea {
+    border-radius: 0px;
+    background-color: #0B3731;
+    color:#fff;
+    float:right;
+}
+
+
+
 .headerBar {
   height: 48px;
   background: #0B3731;
