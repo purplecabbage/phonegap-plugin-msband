@@ -397,7 +397,8 @@
     
     [self.client.tileManager removeTileWithId:tileId completionHandler:^(NSError *error) {
         if(error) {
-            
+            CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.localizedDescription];
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
         }
         else {
             CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
@@ -422,11 +423,13 @@
     
     [self.client.notificationManager sendMessageWithTileID:tileId title:title body:body timeStamp:[NSDate date] flags:MSBNotificationMessageFlagsNone completionHandler:^(NSError *error) {
         if (!error) {
-            //[self output:@"Successfully Finished!!! You can remove tile via Microsoft Health App."];
+            CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
         }
         else
         {
-           // [self output:error.localizedDescription];
+            CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.localizedDescription];
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
         }
     }];
 
@@ -442,7 +445,8 @@
             [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
         }
         else {
-            
+            CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.localizedDescription];
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
         }
     }];
     
