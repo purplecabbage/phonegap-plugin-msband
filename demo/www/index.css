@@ -33,9 +33,29 @@ body {
 input[type=text], textarea {
     border-radius: 0px;
     background-color: #0B3731;
+    border:solid 1px #219E8C;
     color:#fff;
     float:right;
+    clear:right;
+
+    width:75%;
+ 
+    margin:0px 0px 5px 10px;
+    padding:0px 12px 0px 12px;
+    font-size: 18px;
+    line-height:32px;
 }
+
+textarea {
+
+}
+
+textarea:after {
+    content:"";
+    display:block;
+    clear: right;
+}
+
 
 
 
@@ -66,10 +86,12 @@ input[type=text], textarea {
   background-color: #219E8C;
   color:#000;
   height:42px;
+  line-height:32px;
   font-weight:bold;
   font-size:16px;
+  margin:20px 0;
+  padding:0 20px;
   float:right;
-  margin:20px 0px;
 }
 
 .actionButton:active {
@@ -244,10 +266,15 @@ div.value{
     border-top:solid 1px #0B3731;
 }
 
-.sub-view {
-
+.ulSensors li:after {
+    content: "";
+    display: block;
+    clear: right; /* if you need to break floating elements */
 }
 
+.sub-view {
+    
+}
 
 .accordion li > .sub-view {
     height: 0;
@@ -262,14 +289,11 @@ div.value{
 }
 
 
-
 .accordion li:target > .sub-view {
     height: 300px;
     overflow:scroll;
     -webkit-overflow-scrolling: touch;
-
     margin:10px 10px;
-
     /*box-shadow: 0px 0px -50px 5px #000;*/
 }
 

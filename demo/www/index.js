@@ -60,6 +60,12 @@ function onGotVersionInfoSuccess(evt) {
     pFirmwareVersion.innerText = evt.frameworkVersion;
     pHardwareVersion.innerText = evt.hardwareVersion;
 
+    var output = "";
+    for(var v in evt){
+        output += v + ":" + evt[v] + "<br>";
+    }
+    txtBandInfo.innerHTML = output;
+
 }
 
 function onGotVersionInfoError(err) {
@@ -112,7 +118,12 @@ function createTile() {
 		alert("onCreateTileError::" + err);
 	}
 
-	msband.tiles.addTile(onCreateTileSuccess,onCreateTileError,tileId,tileName,lgIconImg,smIconImg);
+	msband.tiles.addTile(onCreateTileSuccess,
+						 onCreateTileError,
+						 tileId,
+						 tileName,
+						 lgIconImg,
+						 smIconImg);
 }
 
 function onBtnGetTileSlots() {
@@ -124,7 +135,7 @@ function onBtnGetTileSlots() {
 		alert("onGetTileCountError::" + err);
 	}
 
-	msband.tiles.getRemainingTileCapacity(onGetTileCountSuccess,onGetTileCountError);
+	msband.tiles.getRemainingTileCapacity(onGetTileCountSuccess, onGetTileCountError);
 }
 
 function onBtnSendTileMessage(){
@@ -135,7 +146,11 @@ function onBtnSendTileMessage(){
 		alert("onBtnSendTileMessage Error " + err);
 	}
 
-	msband.tiles.sendMesageWithTileId(success,error,tileId,"Title","Body body body body");
+	
+	var title = txtMessageTitle.value;
+	var body = taMessageBody.value;
+
+	msband.tiles.sendMesageWithTileId(success,error,tileId,title,body);
 }
 
 function onBtnRemoveTile(){

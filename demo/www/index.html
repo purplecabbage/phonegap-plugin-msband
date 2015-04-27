@@ -32,8 +32,7 @@
                             <td></td>
                             <td>
                                 <button class="actionButton" 
-                                        id="btnGetBandInfo">Get Band Info &gt;
-                                </button>
+                                        id="btnGetBandInfo">Get Band Info</button>
                             
                             </td>
                         </tr>
@@ -42,20 +41,19 @@
                                 <div class='dvLabelValue'>Firmware</div>
                             </td>
                             <td>
-                                <div class="value" id="pFirmwareVersion">unknown</div>
+                                <div class="value" id="pFirmwareVersion">?</div>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <div class='dvLabelValue' >Hardware</div>
+                                <div class='dvLabelValue'>Hardware</div>
                             </td>
                             <td>
-                                <div class="value" id="pHardwareVersion">unknown</div>
+                                <div class="value" id="pHardwareVersion">?</div>
                             </td>
                         </tr>
-
-
-                    </table>    
+                    </table> 
+                    <div class="sensorOutput" id="txtBandInfo"></div>   
 
             </li>
 
@@ -256,36 +254,51 @@ locked onto the wearer&apos;s heart rate.</p>
                 <a href="#tilesView">Tiles</a>
 
                 <div class="sub-view">
+                    This section demonstrates how to create and manage tiles on the band.
+                    <br><br><br>
+                    <ul class="ulSensors">
+                        <li>
+                            <h3>Create a Tile</h3>
+                            <p>Create a tile titled 'PhoneGap' with a guid using icon assets from the app package.</p>
+                            <button class="actionButton"
+                                    id="btnCreateTile">Create Tile</button>
+                        </li>
+                        <li>
+                            <h3>Remove a Tile</h3>
+                            <p>Remove the tile titled 'PhoneGap' by it's guid. This call will return an error if the tile does not exist.
+                            </p>
+                            <button class="actionButton" 
+                                    id="btnRemoveTile">Remove Tile</button>
+                        </li>
+                        <li>
+                            <h3>Tile space info</h3>
+                            <p>See how many open tile slots are available.</p>
+                            <button class="actionButton" 
+                                    id="btnGetTileSlots">Get Tile Space Count</button>
+                        </li>
+                        <li>
+                            <h3>Tile Messaging</h3>
+                            <p>Send a message to our tile.</p>
+                            <label for="txtMessageTitle">Title</label>
+                            <input type="text" id="txtMessageTitle"></input>
+                            <div style="clear:both;"></div>
 
-                    Here is where you will be able to create and manage tiles through the api
+                            <label for="taMessageBody">Body</label>
+                            <textarea id="taMessageBody"></textarea>
+                            <div style="clear:both;"></div>
 
-                    <button class="actionButton" 
-                            id="btnCreateTile">Create Tile &gt;</button>
-                    <br>
-                    <button class="actionButton" 
-                            id="btnRemoveTile">Remove Tile &gt;</button>
-                    <br>
-                    <button class="actionButton" 
-                            id="btnGetTileSlots">Get Tile Space Count &gt;</button>
-                    <br>
-                    <button class="actionButton" 
-                            id="btnSendTileMessage">Send Tile Message &gt;</button>
-                    <br>
-
+                            <button class="actionButton" 
+                                    id="btnSendTileMessage">Send Tile Message</button>
+                        </li>
+                    </ul>
                 </div>
-
             </li>
             
             <li id="personalizeView">
                 <a href="#personalizeView">Personalize</a>
-
                 <div class="sub-view">
-
-                Personalize stuff goes here
-
-
+                    Personalize stuff goes here ... eventually
                 </div>
-
             </li>
         
         </ul>
