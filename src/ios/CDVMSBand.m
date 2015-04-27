@@ -378,8 +378,8 @@
         [self.client.tileManager addTile:tile completionHandler:^(NSError *error) {
             if (error)
             {
-                // todo: check if error.code == MSBErrorCodeTileAlreadyExist
-                // todo: return error to js
+                CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.localizedDescription];
+                [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
             }
             else
             {
