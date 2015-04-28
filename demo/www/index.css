@@ -262,11 +262,11 @@ div.value{
     /*box-shadow: 0px 0px 5px 0px #000;*/
 }
 
-.ulSensors li {
+.sub-view ul li {
     border-top:solid 1px #0B3731;
 }
 
-.ulSensors li:after {
+.sub-view ul li:after {
     content: "";
     display: block;
     clear: right; /* if you need to break floating elements */

@@ -69,7 +69,7 @@
                 </p>
                 
                 <br><br><br>
-                    <ul class="ulSensors">
+                    <ul>
                         <li>
                             <h3>Band Contact</h3>
                             <p>Provides a way to let the developer know if someone is currently wearing the Band.
@@ -256,10 +256,16 @@ locked onto the wearer&apos;s heart rate.</p>
                 <div class="sub-view">
                     This section demonstrates how to create and manage tiles on the band.
                     <br><br><br>
-                    <ul class="ulSensors">
+                    <ul>
+                        <li>
+                            <h3>Tile space info</h3>
+                            <p>See how many open tile slots are available.</p>
+                            <button class="actionButton" 
+                                    id="btnGetTileSlots">Get Tile Space Count</button>
+                        </li>
                         <li>
                             <h3>Create a Tile</h3>
-                            <p>Create a tile titled 'PhoneGap' with a guid using icon assets from the app package.</p>
+                            <p>Create a tile titled 'PhoneGap' with a guid using icon assets from the app package. This call will fail if a tile already exists with the guid, or if there are no empty tile slots.</p>
                             <button class="actionButton"
                                     id="btnCreateTile">Create Tile</button>
                         </li>
@@ -269,12 +275,6 @@ locked onto the wearer&apos;s heart rate.</p>
                             </p>
                             <button class="actionButton" 
                                     id="btnRemoveTile">Remove Tile</button>
-                        </li>
-                        <li>
-                            <h3>Tile space info</h3>
-                            <p>See how many open tile slots are available.</p>
-                            <button class="actionButton" 
-                                    id="btnGetTileSlots">Get Tile Space Count</button>
                         </li>
                         <li>
                             <h3>Tile Messaging</h3>
