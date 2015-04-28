@@ -196,10 +196,24 @@ module.exports = {
     },
     personalization:{
     	getCurrentTheme:function(win,lose) {
+			function onSuccess(res) {
+	            win && win(res);
+	        }
 
+	        function onError(err) {
+	            fail && fail(err);
+	        }
+	        exec(onSuccess, onError, "MSBandPlugin", "getCurrentTheme", []);
     	},
     	setCurrentTheme:function(win,lose,theme) {
+			function onSuccess(res) {
+	            win && win(res);
+	        }
 
+	        function onError(err) {
+	            fail && fail(err);
+	        }
+	        exec(onSuccess, onError, "MSBandPlugin", "setCurrentTheme", theme);
     	},
     	getMeTile:function(win,lose) {
 

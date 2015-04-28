@@ -451,4 +451,106 @@
     }];
     
 }
+
+
+///////// Theming
+
+-(void)getCurrentTheme:(CDVInvokedUrlCommand*)command
+{
+    
+    __block NSString* callbackId = [NSString stringWithString:command.callbackId ];
+    [self.client.personalizationManager
+     themeWithCompletionHandler:^(MSBTheme *theme, NSError *error){
+         if (!error){
+             
+             NSMutableDictionary* themeMap = [NSMutableDictionary dictionaryWithCapacity:6];
+             
+             [themeMap setValue:[self hexStringFromUIColor:[theme.highLightColor UIColor]] forKey:@"highLightColor"];
+             
+             [themeMap setValue:[self hexStringFromUIColor:[theme.highContrastColor UIColor]] forKey:@"highContrastColor"];
+             
+             [themeMap setValue:[self hexStringFromUIColor:[theme.lowLightColor UIColor]] forKey:@"lowLightColor"];
+             
+             [themeMap setValue:[self hexStringFromUIColor:[theme.secondaryTextColor UIColor]] forKey:@"secondaryTextColor"];
+             
+             [themeMap setValue:[self hexStringFromUIColor:[theme.mutedColor UIColor]]
+                 forKey:@"mutedColor"];
+             
+             [themeMap setValue:[self hexStringFromUIColor:[theme.baseColor UIColor]]
+                 forKey:@"baseColor"];
+             
+             CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:themeMap];
+
+             
+             [self.commandDelegate sendPluginResult:result callbackId:callbackId];
+         }
+         else {
+             CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.localizedDescription];
+             [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
+         }
+     }];
+    
+}
+
+
+
+
+-(void)setCurrentTheme:(CDVInvokedUrlCommand*)command
+{
+    __block NSString* callbackId = [NSString stringWithString:command.callbackId ];
+    
+    MSBColor *base = [self colorFromHexString:(NSString*)command.arguments[0]];
+    MSBColor *highlight = [self colorFromHexString:(NSString*)command.arguments[1]];
+    MSBColor *lowlight = [self colorFromHexString:(NSString*)command.arguments[2]];
+    MSBColor *secondary = [self colorFromHexString:(NSString*)command.arguments[3]];
+    MSBColor *highContrast = [self colorFromHexString:(NSString*)command.arguments[4]];
+    MSBColor *muted = [self colorFromHexString:(NSString*)command.arguments[5]];
+    
+    
+    MSBTheme *theme = [MSBTheme themeWithBaseColor:base
+                                   highLightColor:highlight
+                                     lowLightColor:lowlight
+                                 secondaryTextColor:secondary
+                                 highContrastColor:highContrast
+                                        mutedColor:muted];
+
+    
+    
+    [self.client.personalizationManager updateTheme:theme
+                                  completionHandler:^(NSError *error)
+    {
+        if (!error){
+            CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
+        }
+        else {
+            CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.localizedDescription];
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
+        }
+    }];
+}
+
+- (NSString *)hexStringFromUIColor:(UIColor *)color {
+    const CGFloat *parts = CGColorGetComponents(color.CGColor);
+    NSString* hexString =  [NSString stringWithFormat:@"#%02lX%02lX%02lX",
+            lroundf(parts[0] * 255),
+            lroundf(parts[1] * 255),
+            lroundf(parts[2] * 255)];
+    return hexString;
+}
+
+
+-(MSBColor*)colorFromHexString:(NSString*)hexString
+{
+    unsigned int rgbValue = 0;
+    NSScanner* scanner = [NSScanner scannerWithString:hexString];
+    [scanner setScanLocation:1];
+    [scanner scanHexInt:&rgbValue];
+    
+   return [MSBColor colorWithRed:((rgbValue & 0xFF0000) >> 16)
+                           green:((rgbValue & 0xFF00) >> 8)
+                           blue:(rgbValue & 0xFF) ];
+}
+
+
 @end
