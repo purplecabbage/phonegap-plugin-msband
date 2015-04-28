@@ -8,6 +8,6 @@ PhoneGap Plugin for Microsoft Band
     cordova plugin add cordova-plugin-device
     cordova plugin add cordova-plugin-statusbar
     cordova plugin add cordova-plugin-console
-    cordova plugin add --link ../
+    cordova plugin add --link ../plugin-src/
     cordova platform add ios
     cordova run ios --device
