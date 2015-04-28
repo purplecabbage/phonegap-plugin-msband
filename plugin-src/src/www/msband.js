@@ -114,6 +114,16 @@ function onSensorError(sensorEvent,res) {
 
 
 module.exports = {
+	BandSensorEventNames:{
+		Accelerometer: 	"accelerometer",
+		Gyroscope: 		"gyroscope",
+		Distance:  		"distance", 
+		HeartRate:      "heartrate",
+		Pedometer:      "pedometer",
+		SkinTemperature:"skintemperature",
+		UVLevel:        "uvlevel",
+		BandContact:    "bandcontact"
+	},
     connect:function(win,lose){// todo: callbacks
         function onConnectSuccess(res) {
             win && win();
