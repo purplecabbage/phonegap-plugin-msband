@@ -36,9 +36,9 @@ function onDeviceReady() {
     btnRemoveTile.addEventListener("click",onBtnRemoveTile);
     btnSendTheme.addEventListener("click",onBtnSendTheme);
 	btnGetTheme.addEventListener("click",onBtnGetTheme);
-    
+
 	msband.connect(onBandConnectSuccess,onBandConnectError);
-}   
+}
 
 function onBandConnectSuccess(evt) {
 	isBandConnected = true;
@@ -59,6 +59,7 @@ function stopAllSensors() {
 }
 
 function onGotVersionInfoSuccess(evt) {
+  
     pFirmwareVersion.innerText = evt.frameworkVersion;
     pHardwareVersion.innerText = evt.hardwareVersion;
 
@@ -107,7 +108,7 @@ function subscribeSwitchClicked(id,isOn) {
 }
 
 function createTile() {
-	
+
 	var tileName = "PhoneGap";
 	var smIconImg = "www/pgBandIcons/24x24.png";
 	var lgIconImg = "www/pgBandIcons/46x46.png";
@@ -148,7 +149,7 @@ function onBtnSendTileMessage(){
 		alert("onBtnSendTileMessage Error " + err);
 	}
 
-	
+
 	var title = txtMessageTitle.value;
 	var body = taMessageBody.value;
 
@@ -166,12 +167,12 @@ function onBtnRemoveTile(){
 	msband.tiles.removeTile(success,error,tileId);
 }
 
-// Theming 
+// Theming
 
 function onBtnGetTheme() {
 
 	function success(res) {
-		
+
 		txtBaseColor.value = res.baseColor;
 		txtBaseColor.style.borderRight = "solid 20px" + res.baseColor;
 
@@ -204,7 +205,7 @@ function onBtnSendTheme() {
 	var highLightColor = txtHLColor.value;
 	var lowLightColor = txtLLColor.value;
 	var secondaryTextColor = txtSecTextColor.value;
-	var highContrastColor = txtHiContColor.value;	
+	var highContrastColor = txtHiContColor.value;
 	var mutedColor = txtMutedColor.value;
 
 	function success(res) {
@@ -217,10 +218,3 @@ function onBtnSendTheme() {
 	msband.personalization.setCurrentTheme(success,error,
 		[baseColor,highLightColor,lowLightColor,secondaryTextColor,highContrastColor,mutedColor]);
 }
-
-
-
-
-
-
-

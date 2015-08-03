@@ -81,7 +81,7 @@ var sensorEventNames = [
 ];
 
 function isValidSensorEvent(sensorEvent) {
-	return (!sensorEvent || 
+	return (!sensorEvent ||
 			!sensorEvent.toLowerCase ||
 			sensorEventNames.indexOf(sensorEvent.toLowerCase()) > -1);
 }
@@ -89,7 +89,7 @@ function isValidSensorEvent(sensorEvent) {
 
 var sensorCallbacks = {};
 
-// initialize internal structures 
+// initialize internal structures
 sensorEventNames.forEach(function(sensorEventName){
 	sensorCallbacks[sensorEventName] = [];
 });
@@ -105,8 +105,8 @@ function onSensorUpdate(result) {
 function onSensorError(sensorEvent,res) {
 	alert("onSensorError::" + JSON.stringify(sensorEvent));
 }
-            
-               
+
+
 
 
 // TODO: Retrieve the Band Version Information
@@ -117,7 +117,7 @@ module.exports = {
 	BandSensorEventNames:{
 		Accelerometer: 	"accelerometer",
 		Gyroscope: 		"gyroscope",
-		Distance:  		"distance", 
+		Distance:  		"distance",
 		HeartRate:      "heartrate",
 		Pedometer:      "pedometer",
 		SkinTemperature:"skintemperature",
@@ -126,10 +126,12 @@ module.exports = {
 	},
     connect:function(win,lose){// todo: callbacks
         function onConnectSuccess(res) {
+        		//alert(JSON.stringify(res));
             win && win();
         }
-               
+
         function onConnectError(err) {
+        	alert(err);
             lose && lose();
         }
         exec(onConnectSuccess, onConnectError, "MSBandPlugin", "connect", []);
@@ -138,7 +140,7 @@ module.exports = {
 		function onInfoSuccess(res) {
 			win && win(res);
 		}
-       
+
 		function onInfoError(err) {
 			lose && lose(err);
 		}
@@ -158,7 +160,7 @@ module.exports = {
 	        function onAddTileSuccess(res) {
 	            win && win(res);
 	        }
-	               
+
 	        function onAddTileError(err) {
 	            fail && fail(err);
 	        }
@@ -168,7 +170,7 @@ module.exports = {
 	        function onSuccess(res) {
 	            win && win(res);
 	        }
-	               
+
 	        function onError(err) {
 	            fail && fail(err);
 	        }
@@ -178,7 +180,7 @@ module.exports = {
 	        function onSuccess(res) {
 	            win && win(res);
 	        }
-	               
+
 	        function onError(err) {
 	            fail && fail(err);
 	        }
@@ -188,7 +190,7 @@ module.exports = {
 	        function onSuccess(res) {
 	            win && win(res);
 	        }
-	               
+
 	        function onError(err) {
 	            fail && fail(err);
 	        }
@@ -197,7 +199,7 @@ module.exports = {
 			function onGetRemTileSuccess(res) {
 	            win && win(res);
 	        }
-	               
+
 	        function onGetRemTileError(err) {
 	            fail && fail(err);
 	        }
