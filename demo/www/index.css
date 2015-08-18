@@ -113,7 +113,7 @@ textarea:after {
 
 div.value{
     background-color: #0B3731;
-    width:240px;
+    width:220px;
     height:32px;   
     margin:0px 0px 5px 10px;
     padding:0px 12px 0px 12px;
@@ -237,7 +237,7 @@ div.value{
     display: block;
     position: relative;
     min-width: 110px;
-    padding: 20px 10px 0 40px;
+    padding: 10px 10px 0 40px;
     height: 48px;
     color: #21B09A;
     font-weight: bold;
